@@ -26,11 +26,11 @@ def calc_implied_volatility(S, K, T, r, market_price, q):
     # Debug: Evaluate the function at the initial bounds
     f_a = black_scholes_call(0.0001)
     f_b = black_scholes_call(100)
-    print(f"f(0.0001) = {f_a}, f(100) = {f_b}, market_price = {market_price}")
+    #print(f"f(0.0001) = {f_a}, f(100) = {f_b}, market_price = {market_price}")
 
     # Check if f(a) and f(b) have different signs
     if f_a * f_b > 0:
-        print(f"No root found between bounds for strike {K} and market price {market_price}")
+        #print(f"No root found between bounds for strike {K} and market price {market_price}")
         return np.nan  # Return NaN to handle gracefully
 
     # Try to find the root using Brent's method

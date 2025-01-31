@@ -9,7 +9,7 @@ def get_spot_price(ticker):
     spot_price = stock.history(period="1d")['Close'].iloc[-1]
     return float(spot_price)
 
-def get_option_chain(ticker, min_strike_pct, max_strike_pct, expiry_range=(0, 1.5)):
+def get_option_chain(ticker, min_strike_pct, max_strike_pct, expiry_range):
     """
     Fetches the option chain using yfinance and filters options based on the given strike price 
     and time-to-expiry criteria.
@@ -29,8 +29,8 @@ def get_option_chain(ticker, min_strike_pct, max_strike_pct, expiry_range=(0, 1.
     # Loop through expiration dates
     for expiration_date in expirations:
         # Calculate time to expiry
-        time_to_expiry = max((datetime.strptime(expiration_date, "%Y-%m-%d") - datetime.now()).days / 365.0, 1e-6)
-        
+        time_to_expiry = max((datetime.strptime(expiration_date, "%Y-%m-%d") - datetime.now()).days / 365.0, 0.01)
+
         # Skip expiration dates outside the desired expiry range
         if not (expiry_range[0] <= time_to_expiry <= expiry_range[1]):
             continue
